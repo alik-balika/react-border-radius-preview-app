@@ -13,7 +13,11 @@ const App = () => {
     height: "300px",
     border: "1px solid black",
     backgroundColor: "red",
-    borderRadius: `${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px`,
+    borderRadius: `${topLeft === "" ? 0 : topLeft}px ${
+      topRight === "" ? 0 : topRight
+    }px ${bottomRight === "" ? 0 : bottomRight}px ${
+      bottomLeft === "" ? 0 : bottomLeft
+    }px`,
   };
 
   return (
@@ -28,6 +32,7 @@ const App = () => {
       <div className="center">
         <div style={boxStyle} />
       </div>
+      <pre id="css-code">border-radius: {boxStyle.borderRadius}</pre>
     </div>
   );
 };
