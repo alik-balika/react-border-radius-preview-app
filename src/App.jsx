@@ -8,6 +8,8 @@ const App = () => {
   const [bottomLeft, setBottomLeft] = useState(0);
   const [bottomRight, setBottomRight] = useState(0);
 
+  const [clipboardIcon, setClipboardIcon] = useState("assignment");
+
   const boxStyle = {
     width: "300px",
     height: "300px",
@@ -18,6 +20,16 @@ const App = () => {
     }px ${bottomRight === "" ? 0 : bottomRight}px ${
       bottomLeft === "" ? 0 : bottomLeft
     }px`,
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText("border-radius: " + boxStyle.borderRadius);
+
+    setClipboardIcon("assignment_turned_in");
+
+    setTimeout(() => {
+      setClipboardIcon("assignment");
+    }, 1000);
   };
 
   return (
@@ -32,7 +44,15 @@ const App = () => {
       <div className="center">
         <div style={boxStyle} />
       </div>
-      <pre id="css-code">border-radius: {boxStyle.borderRadius}</pre>
+      <div id="css-code">
+        <pre id="border-radius-code">
+          border-radius: {boxStyle.borderRadius}
+        </pre>
+        {/* <button>Copy to Clipboard</button> */}
+        <span className="material-symbols-outlined" onClick={copyToClipboard}>
+          {clipboardIcon}
+        </span>
+      </div>
     </div>
   );
 };
